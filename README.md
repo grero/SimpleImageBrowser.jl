@@ -1,6 +1,7 @@
 # Introduction
 [![Build Status](https://travis-ci.org/grero/SimpleImageBrowser.jl.svg?branch=master)](https://travis-ci.org/grero/SimpleImageBrowser.jl)
 [![Coverage Status](https://coveralls.io/repos/github/grero/SimpleImageBrowser.jl/badge.svg?branch=master)](https://coveralls.io/github/grero/SimpleImageBrowser.jl?branch=master)
+
 A simple tool for creating a web page to browser a list of images
 
 # Usage
