@@ -1,5 +1,5 @@
 # Introduction
-
+[![Build Status](https://travis-ci.org/grero/SimpleImageBrowser.jl.svg?branch=master)](https://travis-ci.org/grero/SimpleImageBrowser.jl)
 A simple tool for creating a web page to browser a list of images
 
 # Usage
