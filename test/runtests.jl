@@ -16,5 +16,10 @@ using Test
         @test txt == "<html><head><title>Simple Image Browoser</title></head>\n<body>\n<img src=images/apple.jpg width=256.0 height=256.0 border=1px>\n<img src=images/pear.jpg width=128.0 height=195.0 border=1px>\n</body>\n</html>"
         #cleanup
         rm("app", recursive=true, force=true)
+        #force image size to be the same
+        SimpleImageBrowser.generate_webpage(img_files, (512,512))
+        txt = readchomp(open("app/index.html"))
+        @test txt == "<html><head><title>Simple Image Browoser</title></head>\n<body>\n<img src=images/apple.jpg width=256.0 height=256.0 border=1px>\n<img src=images/pear.jpg width=256.0 height=256.0 border=1px>\n</body>\n</html>"
+        rm.(["apple.jpg","pear.jpg"])
     end
 end
