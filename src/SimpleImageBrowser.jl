@@ -40,18 +40,35 @@ function generate_webpage(outfile::String, imgfiles::Vector{String})
     end
 end
 
-function generate_webpage(imgfiles::Vector{String},args...)
-    mkpath("app/images")
+function generate_webpage(imgfiles::Vector{String},args...;appname="app")
+    mkpath("$(appname)/images")
     new_imgfiles = String[]
     for ff in imgfiles
         ffn = basename(ff)
-        cp(ff, joinpath("app","images", ffn))
+        cp(ff, joinpath(appname,"images", ffn))
         push!(new_imgfiles, joinpath("images", ffn))
     end
-    cd("app") do
+    cd(appname) do
         output = generate_html(new_imgfiles,args...)
         open("index.html","w") do ff
             write(ff, output) 
+        end
+    end
+end
+
+function generate_webpage(imgfiles::Dict{String, Vector{String}},args...)
+    base_app = "app"
+    output = ["<html><head></head>"]
+    push!(output, "<body>")
+    for (k,v) in imgfiles 
+        generate_webpage(v, args...;appname=joinpath(base_app, k))
+        push!(output, "<a href=\"$(k)/index.html\">$(k)</a>")
+    end
+    push!(output, "</body>")
+    push!(output, "</html>")
+    cd(base_app) do
+        open("index.html","w") do ff
+            write(ff, join(output, "\n"))
         end
     end
 end
